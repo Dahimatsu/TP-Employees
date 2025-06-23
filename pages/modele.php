@@ -1,5 +1,5 @@
 <?php
-require('../include/fonctions.php');
+require('../includes/fonctions.php');
 $page = $_GET['page'];
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ $page = $_GET['page'];
 <body class="d-flex flex-column min-vh-100">
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+        <!-- <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
             <div class="container">
                 <a class="navbar-brand me-auto dah-immobilier-logo-text" href="immobilier.php?page=liste">
                     <img src="../assets/images/logo.png" alt="DahImmobilier Logo" class="dah-immobilier-logo me-2" width="50" height="50">
@@ -61,7 +61,7 @@ $page = $_GET['page'];
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> -->
     </header>
 
     <main class="flex-grow-1">
@@ -70,6 +70,7 @@ $page = $_GET['page'];
 
     <footer class="bg-light py-3 mt-auto text-center">
         <p class="mb-0">ETU004054 - RAVELOMANANTSOA Tony Mahefa</p>
+        <p class="mb-0">ETU004054 - RAKOTOBE Joshua Riki</p>
         <p class="mb-0">&copy; 2025</p>
     </footer>
 

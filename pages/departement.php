@@ -1,0 +1,26 @@
+<?php
+    $departement = getDepartementById($_GET['departement']);
+    $employes = getDepartementEmployees($_GET['departement']);
+?> 
+<section>
+    <h1><?= $departement['Departement'] ?> - <?= $departement['Numero'] ?> </h1>
+    <p>Manager : <?= $departement['Manager'] ?></p>
+    <h2>Employés</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Nom Complet</th>
+                <th>Date d'embauche</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($employes as $employe) { ?>
+                <tr>
+                    <td><?= $employe['emp_no'] ?></td>
+                    <td><?= $employe['full_name'] ?></td>
+                    <td><?= date('d/m/Y', strtotime($employe['hire_date'])) ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table> 

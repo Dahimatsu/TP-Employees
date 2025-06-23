@@ -1,10 +1,14 @@
 <?php
-require('includes/connexion.php');
+require('connexion.php');
 
 function getAllDepartments()
 {
     $connect = dbconnect();
-    $query = "SELECT * FROM departments";
+    $query = "SELECT d.dept_no Numero, d.dept_name Departement, CONCAT(e.first_name, ' ', e.last_name) Manager
+              FROM departments d
+              JOIN dept_manager dm ON d.dept_no = dm.dept_no
+              JOIN employees e ON dm.emp_no = e.emp_no
+              ORDER BY d.dept_no";
     $result = mysqli_query($connect, $query);
 
     $departments = [];
@@ -14,4 +18,41 @@ function getAllDepartments()
 
     mysqli_free_result($result);
     return $departments;
+}
+
+function getDepartementById($id)
+{
+    $connect = dbconnect();
+    $query = "SELECT d.dept_no Numero, d.dept_name Departement, CONCAT(e.first_name, ' ', e.last_name) Manager
+              FROM departments d
+              JOIN dept_manager dm ON d.dept_no = dm.dept_no
+              JOIN employees e ON dm.emp_no = e.emp_no
+              WHERE d.dept_no = '%s'";
+
+    $query = sprintf($query, mysqli_real_escape_string($connect, $id));
+    $result = mysqli_query($connect, $query);
+    $department = mysqli_fetch_assoc($result);
+
+    return $department;
+}
+
+function getDepartementEmployees($id)
+{
+    $connect = dbconnect();
+    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.hire_date
+              FROM employees e
+              JOIN dept_emp de ON e.emp_no = de.emp_no
+              WHERE de.dept_no = '%s'
+              ORDER BY e.emp_no";
+
+    $query = sprintf($query, mysqli_real_escape_string($connect, $id));
+    $result = mysqli_query($connect, $query);
+
+    $employees = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employees[] = $row;
+    }
+
+    mysqli_free_result($result);
+    return $employees;
 }
