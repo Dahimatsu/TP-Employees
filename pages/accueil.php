@@ -20,9 +20,7 @@ $departements = getAllDepartments();
                         </a>
                     </td>
                     <td>
-                        <a href="modele.php?page=departement&departement=<?= $departement['Numero'] ?>" class="text-decoration-none">
-                            <?= $departement['Departement'] ?>
-                        </a>
+                        <?= $departement['Departement'] ?>
                     </td>
                     <td><?= $departement['Manager'] ?></td>
                 </tr>

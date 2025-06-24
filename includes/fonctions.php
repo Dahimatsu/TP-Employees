@@ -8,6 +8,7 @@ function getAllDepartments()
               FROM departments d
               JOIN dept_manager dm ON d.dept_no = dm.dept_no
               JOIN employees e ON dm.emp_no = e.emp_no
+              WHERE dm.to_date = '9999-01-01'
               ORDER BY d.dept_no";
     $result = mysqli_query($connect, $query);
 
@@ -27,7 +28,8 @@ function getDepartementById($id)
               FROM departments d
               JOIN dept_manager dm ON d.dept_no = dm.dept_no
               JOIN employees e ON dm.emp_no = e.emp_no
-              WHERE d.dept_no = '%s'";
+              WHERE dm.to_date = '9999-01-01'
+              AND d.dept_no = '%s'";
 
     $query = sprintf($query, mysqli_real_escape_string($connect, $id));
     $result = mysqli_query($connect, $query);
@@ -39,10 +41,11 @@ function getDepartementById($id)
 function getDepartementEmployees($id)
 {
     $connect = dbconnect();
-    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.hire_date
+    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.hire_date
               FROM employees e
-              JOIN dept_emp de ON e.emp_no = de.emp_no
+              JOIN current_dept_emp de ON e.emp_no = de.emp_no
               WHERE de.dept_no = '%s'
+              AND de.to_date = '9999-01-01'
               ORDER BY e.emp_no";
 
     $query = sprintf($query, mysqli_real_escape_string($connect, $id));
