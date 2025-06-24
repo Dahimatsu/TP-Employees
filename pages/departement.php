@@ -17,7 +17,7 @@
         <tbody>
             <?php foreach ($employes as $employe) { ?>
                 <tr>
-                    <td><?= $employe['emp_no'] ?></td>
+                    <td><a href="modele.php?page=employe&emp_no=<?= $employe['emp_no'] ?>"><?= $employe['emp_no'] ?></a></td>
                     <td><?= $employe['full_name'] ?></td>
                     <td><?= date('d/m/Y', strtotime($employe['hire_date'])) ?></td>
                 </tr>

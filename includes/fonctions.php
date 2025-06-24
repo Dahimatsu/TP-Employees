@@ -59,3 +59,10 @@ function getDepartementEmployees($id)
     mysqli_free_result($result);
     return $employees;
 }
+
+function getEmployeByno($emp_no) {
+    $sql = "SELECT * FROM employees WHERE emp_no = '%s'";
+    $sql = sprintf($sql, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($sql_query);
+}
