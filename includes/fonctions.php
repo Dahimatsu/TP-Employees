@@ -60,6 +60,13 @@ function getDepartementEmployees($id)
     return $employees;
 }
 
+function getEmployeByno($emp_no) {
+    $sql = "SELECT * FROM employees WHERE emp_no = '%s'";
+    $sql = sprintf($sql, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($sql_query);
+}
+
 function searchEmployees($departement, $nom, $age_min, $age_max)
 {
     $connect = dbconnect();
