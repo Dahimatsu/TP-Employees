@@ -68,10 +68,11 @@ function searchEmployees($departement, $nom, $age_min, $age_max)
               JOIN current_dept_emp de ON e.emp_no = de.emp_no
               JOIN departments d ON de.dept_no = d.dept_no
               AND d.dept_name LIKE '%%%s%%%'
-              AND (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')
-              AND YEAR(CURDATE()) - YEAR(e.birth_date) >= %d
-              AND YEAR(CURDATE()) - YEAR(e.birth_date) <= %d";
-    $query = sprintf($query, $departement, $nom, $nom, $age_min, $age_max);
+              OR (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')
+              OR YEAR(CURDATE()) - YEAR(e.birth_date) >= '%s'
+              OR YEAR(CURDATE()) - YEAR(e.birth_date) <= '%s'";
+
+    $query = sprintf($query, $departement, $nom, $nom, (int)$age_min, (int)$age_max);
     $result = mysqli_query($connect, $query);
 
     $employees = [];
