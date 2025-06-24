@@ -31,7 +31,7 @@ function getDepartementById($id)
               WHERE dm.to_date = '9999-01-01'
               AND d.dept_no = '%s'";
 
-    $query = sprintf($query, mysqli_real_escape_string($connect, $id));
+    $query = sprintf($query, $id);
     $result = mysqli_query($connect, $query);
     $department = mysqli_fetch_assoc($result);
 
@@ -48,7 +48,7 @@ function getDepartementEmployees($id)
               AND de.to_date = '9999-01-01'
               ORDER BY e.emp_no";
 
-    $query = sprintf($query, mysqli_real_escape_string($connect, $id));
+    $query = sprintf($query, $id);
     $result = mysqli_query($connect, $query);
 
     $employees = [];
@@ -65,4 +65,27 @@ function getEmployeByno($emp_no) {
     $sql = sprintf($sql, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     return mysqli_fetch_assoc($sql_query);
+}
+
+function searchEmployees($departement, $nom, $age_min, $age_max)
+{
+    $connect = dbconnect();
+    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.birth_date, e.hire_date
+              FROM employees e
+              JOIN current_dept_emp de ON e.emp_no = de.emp_no
+              JOIN departments d ON de.dept_no = d.dept_no
+              AND d.dept_name LIKE '%%%s%%%'
+              AND (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')
+              AND YEAR(CURDATE()) - YEAR(e.birth_date) >= %d
+              AND YEAR(CURDATE()) - YEAR(e.birth_date) <= %d";
+    $query = sprintf($query, $departement, $nom, $nom, $age_min, $age_max);
+    $result = mysqli_query($connect, $query);
+
+    $employees = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $employees[] = $row;
+    }
+
+    mysqli_free_result($result);
+    return $employees;
 }
