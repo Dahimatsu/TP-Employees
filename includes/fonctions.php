@@ -89,3 +89,64 @@ function searchEmployees($departement, $nom, $age_min, $age_max)
     mysqli_free_result($result);
     return $employees;
 }
+
+function thisJobDate($emp_no) {
+    $sql = "SELECT * FROM titles WHERE emp_no = '%s'";
+    $sql = sprintf($sql, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while ($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+
+function thisSalarieDate($to_date, $emp_no) {
+    $sql = "SELECT * FROM salaries 
+    WHERE to_date <= '%s'
+    AND emp_no = '%s'";
+    $sql = sprintf($sql, $to_date, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while ($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+function thisSalarieDateJob2($to_date, $to_date_old, $emp_no) {
+    $sql = "SELECT * FROM salaries 
+    WHERE to_date <= '%s'
+    AND from_date >= '%s'
+    AND emp_no = '%s'";
+    $sql = sprintf($sql, $to_date, $to_date_old, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while ($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+
+
+/*
+test
+SELECT * FROM titles WHERE emp_no = 499998; 
+SELECT * FROM salaries WHERE emp_no = 499998;
+
+SELECT * FROM salaries 
+WHERE AND to_date < '2000-08-03'
+AND
+    AND emp_no = '10017';
+    10017
+
+
+
+
+SELECT * FROM salaries 
+    WHERE to_date <= '9999-01-01'
+    AND from_date >= '2000-08-03'
+    AND emp_no = '10017'
+
+
+
+*/
