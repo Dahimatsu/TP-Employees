@@ -68,57 +68,70 @@ function getEmployeByno($emp_no)
     return mysqli_fetch_assoc($sql_query);
 }
 
-function searchEmployees($departement, $nom, $age_min, $age_max)
+function searchEmployees($departement, $nom, $age_min, $age_max, $page = 1)
 {
     $connect = dbconnect();
 
-    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.birth_date, e.hire_date
-              FROM employees e
-              LEFT JOIN current_dept_emp de ON e.emp_no = de.emp_no
-              LEFT JOIN departments d ON de.dept_no = d.dept_no
-              WHERE 1=1";
+    $baseQuery = "FROM employees e
+                  LEFT JOIN current_dept_emp de ON e.emp_no = de.emp_no
+                  LEFT JOIN departments d ON de.dept_no = d.dept_no
+                  WHERE 1=1";
 
     $params = [];
+    $condition = "";
 
     if (!empty($departement)) {
-        $query .= " AND d.dept_name LIKE '%%%s%%'";
-        $params[] = mysqli_real_escape_string($connect, $departement);
+        $condition .= " AND d.dept_name LIKE '%%%s%%'";
+        $params[] = $departement;
     }
 
     if (!empty($nom)) {
-        $query .= " AND (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')";
-        $nom_esc = mysqli_real_escape_string($connect, $nom);
-        $params[] = $nom_esc;
-        $params[] = $nom_esc;
+        $condition .= " AND (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')";
+        $params[] = $nom;
+        $params[] = $nom;
     }
 
     if (!empty($age_min)) {
-        $query .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) >= %d";
+        $condition .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) >= %d";
         $params[] = (int)$age_min;
     }
 
     if (!empty($age_max)) {
-        $query .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) <= %d";
+        $condition .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) <= %d";
         $params[] = (int)$age_max;
     }
 
-    $query .= " ORDER BY e.emp_no LIMIT 20";
+    $countQuery = "SELECT COUNT(*) AS total " . $baseQuery . $condition;
+    if (!empty($params)) {
+        $countQuery = vsprintf($countQuery, $params);
+    }
+    
+    $countResult = mysqli_query($connect, $countQuery);
+    $total = mysqli_fetch_assoc($countResult)['total'];
+    mysqli_free_result($countResult);
+
+    $limit = 20;
+    $offset = ($page - 1) * $limit;
+
+    $mainQuery = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.birth_date, e.hire_date "
+        . $baseQuery . $condition . " ORDER BY e.emp_no LIMIT $offset, $limit";
 
     if (!empty($params)) {
-        $query = vsprintf($query, $params);
+        $mainQuery = vsprintf($mainQuery, $params);
     }
 
-    $result = mysqli_query($connect, $query);
+    $result = mysqli_query($connect, $mainQuery);
     $employees = [];
-
     while ($row = mysqli_fetch_assoc($result)) {
         $employees[] = $row;
     }
-
     mysqli_free_result($result);
-    return $employees;
-}
 
+    return [
+        'total' => $total,
+        'employees' => $employees
+    ];
+}
 
 
 function thisJobDate($emp_no)
