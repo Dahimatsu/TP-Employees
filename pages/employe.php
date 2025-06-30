@@ -15,12 +15,30 @@ $nbTitles = count($Job);
                     <h5 class="card-title">
                         <strong><?php echo $cet_employe['last_name']; ?></strong> <?php echo $cet_employe['first_name']; ?>
                     </h5>
-                    <p class="card-text">N° Employé: <?php echo $cet_employe['emp_no']; ?></p>
-                    <hr>
+                    <p class="card-text">Matricule:
+                        <strong>
+                            <?php echo $cet_employe['emp_no']; ?>
+                        </strong>
+                    </p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Date de Naissance: <?php echo $cet_employe['birth_date']; ?></li>
-                        <li class="list-group-item">Genre: <?php echo $cet_employe['gender']; ?></li>
-                        <li class="list-group-item">Date d'embauche: <?php echo $cet_employe['hire_date']; ?></li>
+                        <li class="list-group-item">
+                            <i class="bi bi-calendar-date"></i> Date de Naissance:
+                            <strong>
+                                <?php echo $cet_employe['birth_date']; ?>
+                            </strong>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-gender-ambiguous"></i> Genre:
+                            <strong>
+                                <?php echo ($cet_employe['gender'] === 'M') ? 'Homme' : (($cet_employe['gender'] === 'F') ? 'Femme' : 'Inconnu'); ?>
+                            </strong>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-briefcase"></i> Date d'embauche:
+                            <strong>
+                                <?php echo $cet_employe['hire_date']; ?>
+                            </strong>
+                        </li>
                     </ul>
                 </div>
             </div>

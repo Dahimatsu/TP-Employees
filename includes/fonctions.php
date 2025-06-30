@@ -198,3 +198,8 @@ function formatSalaire($salaire)
     $formatted = number_format($salaire, 2, ',', ' ');
     return $formatted . ' €';
 }
+
+function formatNumber($number)
+{
+    return number_format($number, 0, ',', ' ');
+}

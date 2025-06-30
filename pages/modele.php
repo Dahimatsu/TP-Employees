@@ -17,21 +17,22 @@ $page = $_GET['page'];
 <body class="d-flex flex-column min-vh-100">
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
-            <div class="container d-flex justify-content-between align-items-center">
-                <a class="navbar-brand fw-bold fs-4 text-primary" href="?page=accueil">
+        <nav class="main-header-nav">
+            <div class="container d-flex justify-content-between align-items-center py-3">
+                <a class="header-logo" href="?page=accueil">
                     TJ Corporation
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="modele.php?page=accueil">Home</a>
+                <div class="header-nav-links">
+                    <ul class="d-flex align-items-center mb-0 list-unstyled">
+                        <li>
+                            <a href="modele.php?page=accueil">
+                                <i class="bi bi-house-door"></i> Accueil
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="modele.php?page=rechercher">Rechercher</a>
+                        <li>
+                            <a href="modele.php?page=rechercher">
+                                <i class="bi bi-search"></i> Rechercher
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -43,12 +44,15 @@ $page = $_GET['page'];
         <?php require($page . '.php'); ?>
     </main>
 
-    <footer class="bg-dark py-3 mt-auto text-center text-light">
-        <p class="mb-0">ETU004054 - RAVELOMANANTSOA Tony Mahefa</p>
-        <p class="mb-0">ETU004054 - RAKOTOBE Joshua Riki</p>
-        <p class="mb-0">&copy; 2025</p>
+    <footer class="main-footer">
+        <div class="footer-bottom-bar text-center py-2">
+            <div class="container d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
+                <span class="copyright-text">ETU004054 - RAVELOMANANTSOA Tony Mahefa</span>
+                <span class="copyright-text">ETU004054 - RAKOTOBE Joshua Riki</span>
+            </div>
+            <p>&copy; Juin 2025</p>
+        </div>
     </footer>
-
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>

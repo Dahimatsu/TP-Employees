@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php if (!empty($resultats) && !empty($employes)) { ?>
     <div class="container mt-4">
-        <h2>Résultats de la recherche (<?= $total ?> employés trouvés)</h2>
+        <h2>Résultats de votre recherche : <?= formatNumber($total) ?> employés trouvés</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -59,26 +59,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </table>
 
         <div class="d-flex justify-content-center gap-3 mt-3">
-            <?php if ($page > 1) { ?>
-                <form method="post">
-                    <input type="hidden" name="page" value="<?= $page - 1 ?>">
-                    <input type="hidden" name="departement" value="<?= $departement ?>">
-                    <input type="hidden" name="nom" value="<?= $nom ?>">
-                    <input type="hidden" name="age_min" value="<?= $age_min ?>">
-                    <input type="hidden" name="age_max" value="<?= $age_max ?>">
-                    <button type="submit" class="btn btn-secondary">Précédent</button>
-                </form>
-            <?php } ?>
-
             <?php if ($page < $pages) { ?>
-                <form method="post">
-                    <input type="hidden" name="page" value="<?= $page + 1 ?>">
-                    <input type="hidden" name="departement" value="<?= $departement ?>">
-                    <input type="hidden" name="nom" value="<?= $nom ?>">
-                    <input type="hidden" name="age_min" value="<?= $age_min ?>">
-                    <input type="hidden" name="age_max" value="<?= $age_max ?>">
-                    <button type="submit" class="btn btn-secondary">Suivant</button>
-                </form>
+                <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+                    <?php
+                    $range = 2;
+                    $start = max(1, $page - $range);
+                    $end = min($pages, $page + $range);
+                    ?>
+
+                    <?php if ($page > 1) { ?>
+                        <form method="post" class="m-0">
+                            <input type="hidden" name="page" value="<?= $page - 1 ?>">
+                            <input type="hidden" name="departement" value="<?= $departement ?>">
+                            <input type="hidden" name="nom" value="<?= $nom ?>">
+                            <input type="hidden" name="age_min" value="<?= $age_min ?>">
+                            <input type="hidden" name="age_max" value="<?= $age_max ?>">
+                            <button type="submit" class="btn btn-outline-secondary">«</button>
+                        </form>
+                    <?php } ?>
+
+                    <?php for ($i = $start; $i <= $end; $i++) { ?>
+                        <form method="post" class="m-0">
+                            <input type="hidden" name="page" value="<?= $i ?>">
+                            <input type="hidden" name="departement" value="<?= $departement ?>">
+                            <input type="hidden" name="nom" value="<?= $nom ?>">
+                            <input type="hidden" name="age_min" value="<?= $age_min ?>">
+                            <input type="hidden" name="age_max" value="<?= $age_max ?>">
+                            <button type="submit" class="btn <?= $i === $page ? 'btn-primary' : 'btn-outline-secondary' ?>">
+                                <?= $i ?>
+                            </button>
+                        </form>
+                    <?php } ?>
+
+                    <?php if ($page < $pages) { ?>
+                        <form method="post" class="m-0">
+                            <input type="hidden" name="page" value="<?= $page + 1 ?>">
+                            <input type="hidden" name="departement" value="<?= $departement ?>">
+                            <input type="hidden" name="nom" value="<?= $nom ?>">
+                            <input type="hidden" name="age_min" value="<?= $age_min ?>">
+                            <input type="hidden" name="age_max" value="<?= $age_max ?>">
+                            <button type="submit" class="btn btn-outline-secondary">»</button>
+                        </form>
+                    <?php } ?>
+                </div>
+
             <?php } ?>
         </div>
     </div>
