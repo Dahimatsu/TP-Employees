@@ -3,8 +3,8 @@
     $employes = getDepartementEmployees($_GET['departement']);
 ?> 
 <section>
-    <h1><?= $departement['Departement'] ?> - <?= $departement['Numero'] ?> </h1>
-    <p>Manager : <?= $departement['Manager'] ?></p>
+    <h1 class="text-center" ><?= $departement['Departement'] ?> - <?= $departement['Numero'] ?> </h1>
+    <p class="text-center" >Manager : <?= $departement['Manager'] ?></p>
     <h2>Employés</h2>
     <table class="table table-striped">
         <thead>

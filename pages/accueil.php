@@ -2,7 +2,7 @@
 $departements = getAllDepartments();
 ?>
 <section>
-    <h1>Liste des départements</h1>
+    <h1 class="text-center">Liste des départements</h1>
     <table class="table table-striped">
         <thead>
             <tr>

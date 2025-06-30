@@ -2,6 +2,10 @@ body {
   background-color: #f8f9fa;
 }
 
+header {
+  margin-bottom: 30px;
+}
+
 .navbar {
   background-color: #ffffff !important;
   border-bottom: 1px solid #e0e0e0;
@@ -195,4 +199,14 @@ h1 strong {
 .carousel-control-next {
   width: 8%;
 }
+
+  .fixed-col-emp {
+      position: sticky;
+      left: 15%;
+      align-self: flex-start; /* Important pour le comportement sticky */
+  }
+
+  .emp {
+    padding-top: 60px;
+  }
 

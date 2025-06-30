@@ -43,7 +43,7 @@ $page = $_GET['page'];
         <?php require($page . '.php'); ?>
     </main>
 
-    <footer class="bg-light py-3 mt-auto text-center">
+    <footer class="bg-dark py-3 mt-auto text-center text-light">
         <p class="mb-0">ETU004054 - RAVELOMANANTSOA Tony Mahefa</p>
         <p class="mb-0">ETU004054 - RAKOTOBE Joshua Riki</p>
         <p class="mb-0">&copy; 2025</p>
