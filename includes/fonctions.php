@@ -38,17 +38,30 @@ function getDepartementById($id)
     return $department;
 }
 
-function getDepartementEmployees($id)
+function getDepartementEmployees($id, $page = 1, $limit = 20)
 {
     $connect = dbconnect();
-    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.hire_date
+
+    $offset = ($page - 1) * $limit;
+
+    $countQuery = "SELECT COUNT(*) AS total
+                   FROM current_dept_emp
+                   WHERE dept_no = '%s' AND to_date = '9999-01-01'";
+
+    $countQuery = sprintf($countQuery, $id);
+    $countResult = mysqli_query($connect, $countQuery);
+    $total = mysqli_fetch_assoc($countResult)['total'];
+    mysqli_free_result($countResult);
+
+    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.hire_date
               FROM employees e
               JOIN current_dept_emp de ON e.emp_no = de.emp_no
               WHERE de.dept_no = '%s'
               AND de.to_date = '9999-01-01'
-              ORDER BY e.emp_no";
+              ORDER BY e.emp_no
+              LIMIT %d OFFSET %d";
 
-    $query = sprintf($query, $id);
+    $query = sprintf($query, $id, $limit, $offset);
     $result = mysqli_query($connect, $query);
 
     $employees = [];
@@ -57,8 +70,13 @@ function getDepartementEmployees($id)
     }
 
     mysqli_free_result($result);
-    return $employees;
+
+    return [
+        'total' => $total,
+        'employees' => $employees
+    ];
 }
+
 
 function getEmployeByno($emp_no)
 {
@@ -105,7 +123,7 @@ function searchEmployees($departement, $nom, $age_min, $age_max, $page = 1)
     if (!empty($params)) {
         $countQuery = vsprintf($countQuery, $params);
     }
-    
+
     $countResult = mysqli_query($connect, $countQuery);
     $total = mysqli_fetch_assoc($countResult)['total'];
     mysqli_free_result($countResult);
@@ -175,34 +193,8 @@ function thisSalarieDateJob2($to_date, $to_date_old, $emp_no)
     return $result;
 }
 
-
-/*
-test
-SELECT * FROM titles WHERE emp_no = 499998; 
-SELECT * FROM salaries WHERE emp_no = 499998;
-
-SELECT * FROM salaries 
-WHERE AND to_date < '2000-08-03'
-AND
-    AND emp_no = '10017';
-    10017
-
-
-
-
-SELECT * FROM salaries 
-    WHERE to_date <= '9999-01-01'
-    AND from_date >= '2000-08-03'
-    AND emp_no = '10017'
-
-
-    SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.birth_date, e.hire_date
-              FROM employees e
-              JOIN current_dept_emp de ON e.emp_no = de.emp_no
-              JOIN departments d ON de.dept_no = d.dept_no
-              AND d.dept_name LIKE 'Marketing'
-              OR (e.first_name LIKE 'Bo' OR e.last_name LIKE 'Bo')
-              OR YEAR(CURDATE()) - YEAR(e.birth_date) >= 1
-              OR YEAR(CURDATE()) - YEAR(e.birth_date) <= 80
-              LIMIT 20;
-*/
+function formatSalaire($salaire)
+{
+    $formatted = number_format($salaire, 2, ',', ' ');
+    return $formatted . ' €';
+}
