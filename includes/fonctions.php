@@ -60,7 +60,8 @@ function getDepartementEmployees($id)
     return $employees;
 }
 
-function getEmployeByno($emp_no) {
+function getEmployeByno($emp_no)
+{
     $sql = "SELECT * FROM employees WHERE emp_no = '%s'";
     $sql = sprintf($sql, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
@@ -70,19 +71,46 @@ function getEmployeByno($emp_no) {
 function searchEmployees($departement, $nom, $age_min, $age_max)
 {
     $connect = dbconnect();
-    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.birth_date, e.hire_date
+
+    $query = "SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS full_name, e.birth_date, e.hire_date
               FROM employees e
-              JOIN current_dept_emp de ON e.emp_no = de.emp_no
-              JOIN departments d ON de.dept_no = d.dept_no
-              AND d.dept_name LIKE '%%%s%%%'
-              OR (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')
-              OR YEAR(CURDATE()) - YEAR(e.birth_date) >= '%s'
-              OR YEAR(CURDATE()) - YEAR(e.birth_date) <= '%s'";
+              LEFT JOIN current_dept_emp de ON e.emp_no = de.emp_no
+              LEFT JOIN departments d ON de.dept_no = d.dept_no
+              WHERE 1=1";
 
-    $query = sprintf($query, $departement, $nom, $nom, (int)$age_min, (int)$age_max);
+    $params = [];
+
+    if (!empty($departement)) {
+        $query .= " AND d.dept_name LIKE '%%%s%%'";
+        $params[] = mysqli_real_escape_string($connect, $departement);
+    }
+
+    if (!empty($nom)) {
+        $query .= " AND (e.first_name LIKE '%%%s%%' OR e.last_name LIKE '%%%s%%')";
+        $nom_esc = mysqli_real_escape_string($connect, $nom);
+        $params[] = $nom_esc;
+        $params[] = $nom_esc;
+    }
+
+    if (!empty($age_min)) {
+        $query .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) >= %d";
+        $params[] = (int)$age_min;
+    }
+
+    if (!empty($age_max)) {
+        $query .= " AND (YEAR(CURDATE()) - YEAR(e.birth_date)) <= %d";
+        $params[] = (int)$age_max;
+    }
+
+    $query .= " ORDER BY e.emp_no LIMIT 20";
+
+    if (!empty($params)) {
+        $query = vsprintf($query, $params);
+    }
+
     $result = mysqli_query($connect, $query);
-
     $employees = [];
+
     while ($row = mysqli_fetch_assoc($result)) {
         $employees[] = $row;
     }
@@ -91,7 +119,10 @@ function searchEmployees($departement, $nom, $age_min, $age_max)
     return $employees;
 }
 
-function thisJobDate($emp_no) {
+
+
+function thisJobDate($emp_no)
+{
     $sql = "SELECT * FROM titles WHERE emp_no = '%s'";
     $sql = sprintf($sql, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
@@ -102,7 +133,8 @@ function thisJobDate($emp_no) {
     return $result;
 }
 
-function thisSalarieDate($to_date, $emp_no) {
+function thisSalarieDate($to_date, $emp_no)
+{
     $sql = "SELECT * FROM salaries 
     WHERE to_date <= '%s'
     AND emp_no = '%s'";
@@ -114,7 +146,9 @@ function thisSalarieDate($to_date, $emp_no) {
     }
     return $result;
 }
-function thisSalarieDateJob2($to_date, $to_date_old, $emp_no) {
+
+function thisSalarieDateJob2($to_date, $to_date_old, $emp_no)
+{
     $sql = "SELECT * FROM salaries 
     WHERE to_date <= '%s'
     AND from_date >= '%s'
@@ -149,5 +183,13 @@ SELECT * FROM salaries
     AND emp_no = '10017'
 
 
-
+    SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) full_name, e.birth_date, e.hire_date
+              FROM employees e
+              JOIN current_dept_emp de ON e.emp_no = de.emp_no
+              JOIN departments d ON de.dept_no = d.dept_no
+              AND d.dept_name LIKE 'Marketing'
+              OR (e.first_name LIKE 'Bo' OR e.last_name LIKE 'Bo')
+              OR YEAR(CURDATE()) - YEAR(e.birth_date) >= 1
+              OR YEAR(CURDATE()) - YEAR(e.birth_date) <= 80
+              LIMIT 20;
 */
