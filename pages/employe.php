@@ -2,6 +2,7 @@
 
 $cet_employe = getEmployeByno($_GET['emp_no']);
 $Job = thisJobDate($_GET['emp_no']);
+$longestJob = longestJob($_GET['emp_no']);
 $nbTitles = count($Job);
 
 ?>
@@ -18,6 +19,11 @@ $nbTitles = count($Job);
                     <p class="card-text">Matricule:
                         <strong>
                             <?php echo $cet_employe['emp_no']; ?>
+                        </strong>
+                    </p>
+                    <p class="card-text">Emploi le plus long:
+                        <strong>
+                            <?= $longestJob['title']; ?> - <?= dayToYear($longestJob['duree']); ?>
                         </strong>
                     </p>
                     <ul class="list-group list-group-flush">

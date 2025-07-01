@@ -42,7 +42,8 @@ function getDepartementEmployees($id, $page = 1, $limit = 20)
 
     $countQuery = "SELECT COUNT(*) AS total
                    FROM current_dept_emp
-                   WHERE dept_no = '%s' AND to_date = '9999-01-01'";
+                   WHERE dept_no = '%s' 
+                   AND to_date = '9999-01-01'";
 
     $countQuery = sprintf($countQuery, $id);
     $countResult = mysqli_query($connect, $countQuery);
@@ -150,7 +151,9 @@ function searchEmployees($departement, $nom, $age_min, $age_max, $page = 1)
 
 function thisJobDate($emp_no)
 {
-    $sql = "SELECT * FROM titles WHERE emp_no = '%s'";
+    $sql = "SELECT * 
+            FROM titles 
+            WHERE emp_no = '%s'";
     $sql = sprintf($sql, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -162,9 +165,10 @@ function thisJobDate($emp_no)
 
 function thisSalarieDate($to_date, $emp_no)
 {
-    $sql = "SELECT * FROM salaries 
-    WHERE to_date <= '%s'
-    AND emp_no = '%s'";
+    $sql = "SELECT * 
+            FROM salaries 
+            WHERE to_date <= '%s'
+            AND emp_no = '%s'";
     $sql = sprintf($sql, $to_date, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -177,9 +181,9 @@ function thisSalarieDate($to_date, $emp_no)
 function thisSalarieDateJob2($to_date, $to_date_old, $emp_no)
 {
     $sql = "SELECT * FROM salaries 
-    WHERE to_date <= '%s'
-    AND from_date >= '%s'
-    AND emp_no = '%s'";
+            WHERE to_date <= '%s'
+            AND from_date >= '%s'
+            AND emp_no = '%s'";
     $sql = sprintf($sql, $to_date, $to_date_old, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -198,4 +202,24 @@ function formatSalaire($salaire)
 function formatNumber($number)
 {
     return number_format($number, 0, ',', ' ');
+}
+
+function longestJob($emp_no)
+{
+    $sql = "SELECT title, DATEDIFF(to_date, from_date) AS duree
+            FROM titles
+            WHERE emp_no = '%s'
+            AND to_date != '9999-01-01'
+            ORDER BY duree DESC
+            LIMIT 1";
+    $sql = sprintf($sql, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($sql_query);
+}
+
+function dayToYear($day)
+{
+    $year = floor($day / 365);
+    $remainingDays = $day % 365;
+    return sprintf("%d an(s) et %d jour(s)", $year, $remainingDays);
 }
