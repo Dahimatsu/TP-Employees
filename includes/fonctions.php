@@ -199,3 +199,83 @@ function formatNumber($number)
 {
     return number_format($number, 0, ',', ' ');
 }
+
+<<<<<<< HEAD
+function emploiInfoM() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'M');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+
+function emploiInfoF() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'F');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+=======
+function longestJob($emp_no)
+{
+    $sql = "SELECT title, DATEDIFF(to_date, from_date) AS duree
+            FROM titles
+            WHERE emp_no = %d
+            AND to_date != '9999-01-01'
+            ORDER BY duree DESC
+            LIMIT 1";
+    $sql = sprintf($sql, (int)$emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($sql_query);
+}
+
+
+function isCDI($emp_no)
+{
+    $sql = "SELECT COUNT(*) AS count
+            FROM titles
+            WHERE emp_no = %d
+            AND to_date = '9999-01-01'";
+    $sql = sprintf($sql, (int)$emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($sql_query);
+
+    return $result['count'] > 0;
+}
+
+
+function dayToYear($day)
+{
+    $year = floor($day / 365);
+    $remainingDays = $day % 365;
+    return sprintf("%d an(s) et %d jour(s)", $year, $remainingDays);
+}
+
+function getEmployeeDept($emp_no)
+{
+    $sql = "SELECT dept_no
+            FROM v_employes
+            WHERE emp_no = '%s'";
+    $sql = sprintf($sql, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $departments = mysqli_fetch_assoc($sql_query);
+
+    return $departments['dept_no'] ?? null;
+}
+
+
+
+>>>>>>> a815a16c2b1937204f67a3769355281eb61e9bfa
