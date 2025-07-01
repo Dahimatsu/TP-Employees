@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+-- Vue info emp
 CREATE OR REPLACE VIEW v_employees_title_gender AS 
 SELECT 
     employees.emp_no,
@@ -22,7 +22,10 @@ SELECT
     v_avg_salaire_emploi.avgSalary
 FROM v_employees_title_gender JOIN v_avg_salaire_emploi
 ON v_employees_title_gender.title = v_avg_salaire_emploi.title;
-=======
+
+
+
+
 -- Vue departement
 CREATE VIEW v_departement AS
 SELECT 
@@ -58,4 +61,3 @@ JOIN
     current_dept_emp de ON e.emp_no = de.emp_no AND de.to_date = '9999-01-01'
 JOIN 
     departments d ON de.dept_no = d.dept_no;
->>>>>>> a815a16c2b1937204f67a3769355281eb61e9bfa
