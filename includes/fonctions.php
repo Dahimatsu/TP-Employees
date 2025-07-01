@@ -200,35 +200,6 @@ function formatNumber($number)
     return number_format($number, 0, ',', ' ');
 }
 
-<<<<<<< HEAD
-function emploiInfoM() 
-{
-    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
-            WHERE gender = '%s'
-            GROUP BY title";
-    $sql = sprintf($sql, 'M');
-    $sql_query = mysqli_query(dbconnect(), $sql);
-    $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
-        $result[] = $row;
-    }
-    return $result;
-}
-
-function emploiInfoF() 
-{
-    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
-            WHERE gender = '%s'
-            GROUP BY title";
-    $sql = sprintf($sql, 'F');
-    $sql_query = mysqli_query(dbconnect(), $sql);
-    $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
-        $result[] = $row;
-    }
-    return $result;
-}
-=======
 function longestJob($emp_no)
 {
     $sql = "SELECT title, DATEDIFF(to_date, from_date) AS duree
@@ -276,6 +247,30 @@ function getEmployeeDept($emp_no)
     return $departments['dept_no'] ?? null;
 }
 
+function emploiInfoM() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'M');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
 
-
->>>>>>> a815a16c2b1937204f67a3769355281eb61e9bfa
+function emploiInfoF() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'F');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
