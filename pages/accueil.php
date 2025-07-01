@@ -9,6 +9,7 @@ $departements = getAllDepartments();
                 <th>Numéro</th>
                 <th>Departement</th>
                 <th>Manager</th>
+                <th>Nombre d'employés</th>
             </tr>
         </thead>
         <tbody>
@@ -19,10 +20,9 @@ $departements = getAllDepartments();
                             <?= $departement['Numero'] ?>
                         </a>
                     </td>
-                    <td>
-                        <?= $departement['Departement'] ?>
-                    </td>
+                    <td><?= $departement['Departement'] ?></td>
                     <td><?= $departement['Manager'] ?></td>
+                    <td><?= formatNumber($departement['nb_employes']) ?></td>
                 </tr>
             <?php } ?>
         </tbody>

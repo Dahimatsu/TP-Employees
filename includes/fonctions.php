@@ -4,12 +4,8 @@ require('connexion.php');
 function getAllDepartments()
 {
     $connect = dbconnect();
-    $query = "SELECT d.dept_no Numero, d.dept_name Departement, CONCAT(e.first_name, ' ', e.last_name) Manager
-              FROM departments d
-              JOIN dept_manager dm ON d.dept_no = dm.dept_no
-              JOIN employees e ON dm.emp_no = e.emp_no
-              WHERE dm.to_date = '9999-01-01'
-              ORDER BY d.dept_no";
+    $query = "SELECT * 
+              FROM v_departement";
     $result = mysqli_query($connect, $query);
 
     $departments = [];
@@ -24,12 +20,9 @@ function getAllDepartments()
 function getDepartementById($id)
 {
     $connect = dbconnect();
-    $query = "SELECT d.dept_no Numero, d.dept_name Departement, CONCAT(e.first_name, ' ', e.last_name) Manager
-              FROM departments d
-              JOIN dept_manager dm ON d.dept_no = dm.dept_no
-              JOIN employees e ON dm.emp_no = e.emp_no
-              WHERE dm.to_date = '9999-01-01'
-              AND d.dept_no = '%s'";
+    $query = "SELECT * 
+              FROM v_departement
+              WHERE Numero = '%s'";
 
     $query = sprintf($query, $id);
     $result = mysqli_query($connect, $query);
@@ -46,7 +39,8 @@ function getDepartementEmployees($id, $page = 1, $limit = 20)
 
     $countQuery = "SELECT COUNT(*) AS total
                    FROM current_dept_emp
-                   WHERE dept_no = '%s' AND to_date = '9999-01-01'";
+                   WHERE dept_no = '%s' 
+                   AND to_date = '9999-01-01'";
 
     $countQuery = sprintf($countQuery, $id);
     $countResult = mysqli_query($connect, $countQuery);
@@ -151,10 +145,11 @@ function searchEmployees($departement, $nom, $age_min, $age_max, $page = 1)
     ];
 }
 
-
 function thisJobDate($emp_no)
 {
-    $sql = "SELECT * FROM titles WHERE emp_no = '%s'";
+    $sql = "SELECT * 
+            FROM titles 
+            WHERE emp_no = '%s'";
     $sql = sprintf($sql, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -166,9 +161,10 @@ function thisJobDate($emp_no)
 
 function thisSalarieDate($to_date, $emp_no)
 {
-    $sql = "SELECT * FROM salaries 
-    WHERE to_date <= '%s'
-    AND emp_no = '%s'";
+    $sql = "SELECT * 
+            FROM salaries 
+            WHERE to_date <= '%s'
+            AND emp_no = '%s'";
     $sql = sprintf($sql, $to_date, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -181,9 +177,9 @@ function thisSalarieDate($to_date, $emp_no)
 function thisSalarieDateJob2($to_date, $to_date_old, $emp_no)
 {
     $sql = "SELECT * FROM salaries 
-    WHERE to_date <= '%s'
-    AND from_date >= '%s'
-    AND emp_no = '%s'";
+            WHERE to_date <= '%s'
+            AND from_date >= '%s'
+            AND emp_no = '%s'";
     $sql = sprintf($sql, $to_date, $to_date_old, $emp_no);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
@@ -202,32 +198,4 @@ function formatSalaire($salaire)
 function formatNumber($number)
 {
     return number_format($number, 0, ',', ' ');
-}
-
-function emploiInfoM() 
-{
-    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
-            WHERE gender = '%s'
-            GROUP BY title";
-    $sql = sprintf($sql, 'M');
-    $sql_query = mysqli_query(dbconnect(), $sql);
-    $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
-        $result[] = $row;
-    }
-    return $result;
-}
-
-function emploiInfoF() 
-{
-    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
-            WHERE gender = '%s'
-            GROUP BY title";
-    $sql = sprintf($sql, 'F');
-    $sql_query = mysqli_query(dbconnect(), $sql);
-    $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
-        $result[] = $row;
-    }
-    return $result;
 }

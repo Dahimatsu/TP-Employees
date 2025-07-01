@@ -12,7 +12,7 @@ $pages = ceil($total / 20);
 <section>
     <h1 class="text-center"><?= $departement['Departement'] ?> - <?= $departement['Numero'] ?></h1>
     <p class="text-center">Manager : <?= $departement['Manager'] ?></p>
-    <h2>Employés : <?= formatNumber($total) ?></h2>
+    <h2>Employés : <?= formatNumber($departement['nb_employes']) ?></h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -34,7 +34,7 @@ $pages = ceil($total / 20);
 
     <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
         <?php
-        $range = 3; 
+        $range = 3;
         $start = max(1, $page - $range);
         $end = min($pages, $page + $range);
         ?>

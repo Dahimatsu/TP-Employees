@@ -2,11 +2,18 @@
 
 $cet_employe = getEmployeByno($_GET['emp_no']);
 $Job = thisJobDate($_GET['emp_no']);
+$longestJob = longestJob($_GET['emp_no']);
 $nbTitles = count($Job);
-
+$departement = getEmployeeDept($_GET['emp_no']);
 ?>
 
 <section class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="modele.php?page=departement&departement=<?= $departement ?>" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+    </div>
+    <h1 class="text-center mb-1">Informations sur l'employé</h1>
     <div class="row emp">
         <div class="col-md-5 mb-4">
             <div class="card">
@@ -20,6 +27,13 @@ $nbTitles = count($Job);
                             <?php echo $cet_employe['emp_no']; ?>
                         </strong>
                     </p>
+                    <?php if (!empty($longestJob)) { ?>
+                        <p class="card-text">
+                            Emploi le plus long :
+                            <strong><?= $longestJob['title']; ?> - <?= dayToYear($longestJob['duree']); ?></strong>
+                        </p>
+                    <?php } ?>
+
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <i class="bi bi-calendar-date"></i> Date de Naissance:
