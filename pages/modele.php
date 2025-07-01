@@ -50,7 +50,6 @@ $page = $_GET['page'];
                 <span class="copyright-text">ETU004054 - RAVELOMANANTSOA Tony Mahefa</span>
                 <span class="copyright-text">ETU004054 - RAKOTOBE Joshua Riki</span>
             </div>
-            <p>&copy; Juin 2025</p>
         </div>
     </footer>
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>

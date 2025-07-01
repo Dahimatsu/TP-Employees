@@ -4,12 +4,8 @@ require('connexion.php');
 function getAllDepartments()
 {
     $connect = dbconnect();
-    $query = "SELECT d.dept_no Numero, d.dept_name Departement, CONCAT(e.first_name, ' ', e.last_name) Manager
-              FROM departments d
-              JOIN dept_manager dm ON d.dept_no = dm.dept_no
-              JOIN employees e ON dm.emp_no = e.emp_no
-              WHERE dm.to_date = '9999-01-01'
-              ORDER BY d.dept_no";
+    $query = "SELECT * 
+              FROM v_departement";
     $result = mysqli_query($connect, $query);
 
     $departments = [];
