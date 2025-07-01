@@ -262,3 +262,10 @@ h1 strong {
 tbody a {
   text-decoration: none;
 }
+
+.rowInfoEmploi {
+  padding-top: 50px;
+}
+.titleInfoEmploi {
+  margin-bottom: 30px;
+}

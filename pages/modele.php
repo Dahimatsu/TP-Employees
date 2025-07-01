@@ -34,6 +34,12 @@ $page = $_GET['page'];
                                 <i class="bi bi-search"></i> Rechercher
                             </a>
                         </li>
+                        <li>
+                            <a href="modele.php?page=infoEmploi">
+                                <i class="bi bi-info-circle"></i> Nos emplois
+                            </a>
+
+                        </li>
                     </ul>
                 </div>
             </div>

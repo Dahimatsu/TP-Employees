@@ -203,3 +203,31 @@ function formatNumber($number)
 {
     return number_format($number, 0, ',', ' ');
 }
+
+function emploiInfoM() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'M');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
+
+function emploiInfoF() 
+{
+    $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
+            WHERE gender = '%s'
+            GROUP BY title";
+    $sql = sprintf($sql, 'F');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
