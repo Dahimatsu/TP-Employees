@@ -26,7 +26,7 @@ $pourFemmes = emploiInfoF();
             </table>
         </div>
         <div class="col-6">
-            <h3 class="text-center titleInfoEmploi">Les emplyées femmes</h3>
+            <h3 class="text-center titleInfoEmploi">Les employées femmes</h3>
             <table class="table table-striped">
                 <tr>
                     <th>Emplois</th>
