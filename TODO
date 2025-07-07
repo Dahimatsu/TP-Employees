@@ -3,11 +3,10 @@
 ☐ Version 3
 ☐ Version 4
     ☐ Changement de departement - 4155
-    --------
-        ☐ Creation page formChangeDept.php 
-            ☐ Bouton  "changer dept" -> Dans employe.php, lien vers formChangeDept.php
-            ☐ formChangeDept -> 
-                ☐ Afficher son departement avant changement - date de début de ce dept
+    -------- 
+            ✔ Bouton  "changer dept" -> Dans employe.php @done(25-07-07 09:40)
+                ✔ Afficher son departement avant changement - date de début de ce dept @done(25-07-07 10:08)
+                    ✔ Fonction mi-afficher an'ireo données ireo @done(25-07-07 10:08)
                 ☐ Dans le dropdownlist ne plus afficher ce dept
                 ☐ Message d'erreur si le beginning date du nv dept est inferieur à celle de celui qu'on a changé
                 ☐ Verifier dans sa fiche que le dept est à jour

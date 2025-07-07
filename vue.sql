@@ -58,3 +58,16 @@ JOIN
     current_dept_emp de ON e.emp_no = de.emp_no AND de.to_date = '9999-01-01'
 JOIN 
     departments d ON de.dept_no = d.dept_no;
+
+CREATE OR REPLACE VIEW v_empDept AS
+SELECT
+    employees.emp_no,
+    employees.first_name,
+    employees.last_name,
+    departments.dept_name,
+    dept_emp.from_date,
+    dept_emp.to_date
+FROM employees JOIN dept_emp
+ON employees.emp_no = dept_emp.emp_no
+JOIN departments 
+ON dept_emp.dept_no = departments.dept_no;
