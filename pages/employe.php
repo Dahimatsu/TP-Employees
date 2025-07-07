@@ -104,17 +104,20 @@ $departement = getEmployeeDept($_GET['emp_no']);
                             <strong>Manager du département</strong>
                         </p>
                     <?php } ?>
-                    <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error']) && !isManager($cet_employe['emp_no'], $departement)) { ?>
-                        <form method="post">
-                            <input type="submit" class="btn btn-success" name="becomeManager" value="Devenir Manager">
-                        </form>
-                    <?php } ?>
 
-                    <?php if (!isset($_POST['changeDept'])) { ?>
-                        <form method="post">
-                            <input type="submit" class="btn btn-secondary" name="changeDept" value="Changer de departement">
-                        </form>
-                    <?php } ?>
+                    <div class="d-flex gap-2 mb-3 changer">
+                        <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error']) && !isManager($cet_employe['emp_no'], $departement)) { ?>
+                            <form method="post" class="m-0">
+                                <input type="submit" class="btn btn-secondary" name="becomeManager" value="Devenir Manager">
+                            </form>
+                        <?php } ?>
+
+                        <?php if (!isset($_POST['changeDept'])) { ?>
+                            <form method="post" class="m-0">
+                                <input type="submit" class="btn btn-secondary" name="changeDept" value="Changer de departement">
+                            </form>
+                        <?php } ?>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
