@@ -353,7 +353,7 @@ function dept_emp($emp_no)
     return $result;
 }
 
-function choixDept($deptActuel) 
+function choixDept($deptActuel)
 {
     $sql = "SELECT dept_name
             FROM departments
@@ -361,7 +361,7 @@ function choixDept($deptActuel)
     $sql = sprintf($sql, $deptActuel);
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
+    while ($row = mysqli_fetch_assoc($sql_query)) {
         $result[] = $row;
     }
     return $result;
