@@ -75,7 +75,7 @@ $departement = getEmployeeDept($_GET['emp_no']);
                     <?php } ?>
                     <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error']) && !isManager($cet_employe['emp_no'], $departement)) { ?>
                         <form method="post">
-                            <input type="submit" class="btn btn-secondary" name="becomeManager" value="Devenir Manager">
+                            <input type="submit" class="btn btn-success" name="becomeManager" value="Devenir Manager">
                         </form>
                     <?php } ?>
 

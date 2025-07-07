@@ -3,7 +3,7 @@
 ☐ Version 3
 ☐ Version 4
     ☐ Changement de departement - 4155
-    ☐ Devenir Manager - 4054
+    ✔ Devenir Manager - 4054 @done
         ✔ Bouton Devenir Manager - 4054 @done
         ✔ Afficher le formulaire si le bouton devenir Manager est cliqué @done
         ✔ Ne plus afficher le bouton Devenir Manager s'il est déjà appuyé @done
@@ -14,7 +14,7 @@
             ✔ Input hidden : ID de l'employé @done
             ✔ Input hidden : ID du departement @done
             ✔ Input date : Date de debut @done
-        ☐ Traitement-manager.php
+        ✔ Traitement-manager.php @done
             ✔ Recuperation des donnees via POST @done
             ✔ Fonction invalideDate @done
                 ✔ Arguments : Date de debut @done
@@ -24,7 +24,7 @@
                 ✔ Arguments : Date de debut @done
                 ✔ On compare la date de debut avec la date de debut du manager actuel @done
                 ✔ Si la date de debut est antérieure à la date de debut du manager actuel, on renvoie en paramère error=2 @done
-            ☐ Fonction becomeManager
-                - Arguments : ID de l'employé & ID du departement
-                - On update dans le table dept_manager le nouveau manager
-            ☐ Utiliser le fonction becomeManager pour update le tableau
+            ✔ Fonction becomeManager @done
+                ✔ Arguments : ID de l'employé & ID du departement @done
+                ✔ On update dans le table dept_manager le nouveau manager @done
+            ✔ Utiliser le fonction becomeManager pour update le tableau @done
