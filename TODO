@@ -14,3 +14,19 @@
 
 
     ☐ Devenir Manager - 4054
+        ✔ Bouton Devenir Manager - 4054 @done
+        ✔ Afficher le formulaire si le bouton devenir Manager est cliqué @done
+        ✔ Ne plus afficher le bouton Devenir Manager s'il est déjà appuyé @done
+        ✔ Bouton pour annuler de devenir Manager @done
+        ✔ Formulaire de changement de manager - 4054 @done
+            ✔ Action traitement-manager.php @done
+            ✔ Method POST @done
+            ✔ Input hidden : ID de l'employé @done
+            ✔ Input hidden : ID du departement @done
+            ✔ Input date : Date de debut @done
+        ☐ Traitement-manager.php
+            ☐ Recuperation des donnees via POST
+            ☐ Fonction becomeManager
+                - Arguments : ID de l'employé & ID du departement
+                - On update dans le table dept_manager le nouveau manager
+            ☐ Utiliser le fonction becomeManager pour update le tableau
