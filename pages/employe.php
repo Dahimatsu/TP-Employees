@@ -47,36 +47,30 @@ $departement = getEmployeeDept($_GET['emp_no']);
         </div>
     <?php } ?>
 
-    <?php if(isset($_POST['changeDept'])) { ?>
+    <?php if (isset($_POST['changeDept'])) { ?>
         <h1 class="text-center mb-1">Changer de departement</h1>
         <div class="justify-content-center">
             <p class="text-center">
-                Actuellement il se trouve dans : <strong><?php echo dept_emp($cet_employe['emp_no'])['dept_name'];?></strong>
+                Actuellement il se trouve dans : <strong><?php echo dept_emp($cet_employe['emp_no'])['dept_name']; ?></strong>
                 depuis <strong><?php echo dept_emp($cet_employe['emp_no'])['from_date']; ?></strong>
             </p>
-            <?php 
-                $choixDept = choixDept(dept_emp($cet_employe['emp_no'])['dept_name']);
-                $nb_choiDept = count($choixDept);
+            <?php
+            $choixDept = choixDept(dept_emp($cet_employe['emp_no'])['dept_name']);
+            $nb_choiDept = count($choixDept);
             ?>
             <form action="traitement/traitement-.php" method="POST" class="text-center">
-                <div class="mb-3">
-                    <label for="ls_dept" class="form-label">Choisir un département</label>
-                    <select name="ls_dept" id="ls_dept" class="form-select" required>
-                        <option value="" disabled selected>Choisir un département</option>
-                        <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
-                            <option value="<?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>">
-                                <?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="date_deptChange" class="form-label">Date de changement</label>
-                    <input type="date" name="date_deptChange" id="date_deptChange" class="form-control" required>
-                </div>
-                <div class="mb-3 text-center">
-                    <input type="submit" value="Valider" class="btn btn-success">
-                    <a href="?emp_no=<?= $cet_employe['emp_no'] ?>&page=employe" class="btn btn-danger">Annuler</a>
+                <select name="ls_dept" class="form-select mb-2" required>
+                    <option value="" disabled selected>Choisir un département</option>
+                    <?php for ($i = 0; $i < $nb_choiDept; $i++) { ?>
+                        <option value="<?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>">
+                            <?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>
+                        </option>
+                    <?php } ?>
+                </select>
+                <input type="date" name="date_deptChange" class="form-control mb-2" required>
+                <div class="text-center">
+                    <input type="submit" value="Valider" class="btn btn-success btn-sm">
+                    <a href="?emp_no=<?= $cet_employe['emp_no'] ?>&page=employe" class="btn btn-danger btn-sm">Annuler</a>
                 </div>
             </form>
         </div>
