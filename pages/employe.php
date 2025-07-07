@@ -14,10 +14,10 @@ $departement = getEmployeeDept($_GET['emp_no']);
         </a>
     </div>
 
-    <?php if (isset($_POST['becomeManager'])) { ?>
+    <?php if (isset($_POST['becomeManager']) || isset($_GET['error'])) { ?>
         <h1 class="text-center mb-1">Devenir Manager</h1>
         <div class="d-flex justify-content-center">
-            <form action="traitement/traitement-manager.php" method="POST" class="text-center">
+            <form action="traitements/traitement-manager.php" method="POST" class="text-center">
                 <input type="hidden" name="ID_Emp" value="<?= $cet_employe['emp_no'] ?>">
                 <input type="hidden" name="ID_Dept" value="<?= $departement ?>">
                 <label for="dateDebut" class="form-label">Date de début :</label>
@@ -27,6 +27,23 @@ $departement = getEmployeeDept($_GET['emp_no']);
                     <a href="?emp_no=<?= $cet_employe['emp_no'] ?>&page=employe" class="btn btn-danger">Annuler</a>
                 </div>
             </form>
+        </div>
+        <div>
+            <?php if (isset($_GET['error'])) {
+                $error = $_GET['error']; ?>
+                <div class="alert alert-danger mt-3 p-2 text-center" style="font-size:0.95em;">
+                    <?php if ($error == 1) { ?>
+                        Date invalide
+                    <?php } elseif ($error == 2) { ?>
+                        Date trop ancienne
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="alert alert-success mt-3 p-2 text-center" style="font-size:0.95em;">
+                    Devenu manager avec succès !
+                </div>
+            <?php } ?>
         </div>
     <?php } ?>
 
@@ -51,7 +68,7 @@ $departement = getEmployeeDept($_GET['emp_no']);
                         </p>
                     <?php } ?>
 
-                    <?php if (!isset($_POST['becomeManager'])) { ?>
+                    <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error'])) { ?>
                         <form method="post">
                             <input type="submit" class="btn btn-secondary" name="becomeManager" value="Devenir Manager">
                         </form>

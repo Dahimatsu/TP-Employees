@@ -247,7 +247,7 @@ function getEmployeeDept($emp_no)
     return $departments['dept_no'] ?? null;
 }
 
-function emploiInfoM() 
+function emploiInfoM()
 {
     $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
             WHERE gender = '%s'
@@ -255,13 +255,13 @@ function emploiInfoM()
     $sql = sprintf($sql, 'M');
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
+    while ($row = mysqli_fetch_assoc($sql_query)) {
         $result[] = $row;
     }
     return $result;
 }
 
-function emploiInfoF() 
+function emploiInfoF()
 {
     $sql = "SELECT count(emp_no) as nb_emp, title, avgSalary FROM emploiInfo
             WHERE gender = '%s'
@@ -269,8 +269,27 @@ function emploiInfoF()
     $sql = sprintf($sql, 'F');
     $sql_query = mysqli_query(dbconnect(), $sql);
     $result = array();
-    while($row = mysqli_fetch_assoc($sql_query)) {
+    while ($row = mysqli_fetch_assoc($sql_query)) {
         $result[] = $row;
     }
     return $result;
+}
+
+function isAnterieur($date, $departement)
+{
+    $sql = "SELECT from_date
+            FROM dept_manager
+            WHERE dept_no = '%s'";
+    $sql = sprintf($sql, $departement);
+    $query = mysqli_query(dbconnect(), $sql);
+    if (mysqli_fetch_assoc($query) < $date) {
+        return true;
+    }
+}
+
+function valideDate($date)
+{
+    if($date > date('Y-m-d')){
+        return true;
+    }
 }
