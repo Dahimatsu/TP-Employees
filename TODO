@@ -3,4 +3,14 @@
 ☐ Version 3
 ☐ Version 4
     ☐ Changement de departement - 4155
+    --------
+        ☐ Creation page formChangeDept.php 
+            ☐ Bouton  "changer dept" -> Dans employe.php, lien vers formChangeDept.php
+            ☐ formChangeDept -> 
+                ☐ Afficher son departement avant changement - date de début de ce dept
+                ☐ Dans le dropdownlist ne plus afficher ce dept
+                ☐ Message d'erreur si le beginning date du nv dept est inferieur à celle de celui qu'on a changé
+                ☐ Verifier dans sa fiche que le dept est à jour
+
+
     ☐ Devenir Manager - 4054
