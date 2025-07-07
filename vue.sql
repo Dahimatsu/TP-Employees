@@ -23,9 +23,6 @@ SELECT
 FROM v_employees_title_gender JOIN v_avg_salaire_emploi
 ON v_employees_title_gender.title = v_avg_salaire_emploi.title;
 
-
-
-
 -- Vue departement
 CREATE VIEW v_departement AS
 SELECT 

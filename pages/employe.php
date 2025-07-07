@@ -33,7 +33,9 @@ $departement = getEmployeeDept($_GET['emp_no']);
                             <strong><?= $longestJob['title']; ?> - <?= dayToYear($longestJob['duree']); ?></strong>
                         </p>
                     <?php } ?>
-
+                    <button class="btn btn-secondary" name="becomeDept">
+                        Devenir Manager
+                    </button>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <i class="bi bi-calendar-date"></i> Date de Naissance:
