@@ -39,11 +39,11 @@ $departement = getEmployeeDept($_GET['emp_no']);
                     <?php } ?>
                 </div>
             <?php } ?>
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success mt-3 p-2 text-center" style="font-size:0.95em;">
-                    Devenu manager avec succès !
-                </div>
-            <?php } ?>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['success'])) { ?>
+        <div class="alert alert-success mt-3 p-2 text-center" style="font-size:0.95em;">
+            Changement de Manager effectué avec succès !
         </div>
     <?php } ?>
 
@@ -67,8 +67,13 @@ $departement = getEmployeeDept($_GET['emp_no']);
                             <strong><?= $longestJob['title']; ?> - <?= dayToYear($longestJob['duree']); ?></strong>
                         </p>
                     <?php } ?>
-
-                    <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error'])) { ?>
+                    <?php if (isManager($cet_employe['emp_no'], $departement)) { ?>
+                        <p class="card-text text-success">
+                            <i class="bi bi-award"></i>
+                            <strong>Manager du département</strong>
+                        </p>
+                    <?php } ?>
+                    <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error']) && !isManager($cet_employe['emp_no'], $departement)) { ?>
                         <form method="post">
                             <input type="submit" class="btn btn-secondary" name="becomeManager" value="Devenir Manager">
                         </form>

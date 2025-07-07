@@ -279,17 +279,65 @@ function isAnterieur($date, $departement)
 {
     $sql = "SELECT from_date
             FROM dept_manager
-            WHERE dept_no = '%s'";
+            WHERE dept_no = '%s'
+            ORDER BY from_date DESC
+            LIMIT 1";
     $sql = sprintf($sql, $departement);
     $query = mysqli_query(dbconnect(), $sql);
-    if (mysqli_fetch_assoc($query) < $date) {
+    $row = mysqli_fetch_assoc($query);
+
+    if ($row && $row['from_date'] < $date) {
         return true;
     }
+    return false;
 }
 
 function valideDate($date)
 {
-    if($date > date('Y-m-d')){
+    if ($date > date('Y-m-d')) {
         return true;
     }
+}
+
+function getCurrentManager($dept_no)
+{
+    $sql = "SELECT emp_no, from_date, to_date 
+            FROM dept_manager 
+            WHERE dept_no = '%s' 
+            AND to_date = '9999-01-01'";
+    $sql = sprintf($sql, $dept_no);
+    $query = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($query);
+}
+
+function notManagerAnymore($emp_no, $dept_no)
+{
+    $sql = "UPDATE dept_manager 
+            SET to_date = NOW()
+            WHERE emp_no = '%s' 
+            AND dept_no = '%s'";
+    $sql = sprintf($sql, $emp_no, $dept_no);
+    return mysqli_query(dbconnect(), $sql);
+}
+
+function becomeManager($emp_no, $dept_no, $dateDebut, $currentManager)
+{
+    notManagerAnymore($currentManager['emp_no'], $dept_no);
+    $sql = "INSERT INTO dept_manager (emp_no, dept_no, from_date, to_date)
+            VALUES ('%s', '%s', '%s', '9999-01-01')";
+    $sql = sprintf($sql, $emp_no, $dept_no, $dateDebut);
+    return mysqli_query(dbconnect(), $sql);
+}
+
+function isManager($emp_no, $dept_no)
+{
+    $sql = "SELECT COUNT(*) AS count 
+            FROM dept_manager 
+            WHERE emp_no = '%s' 
+            AND dept_no = '%s' 
+            AND to_date = '9999-01-01'";
+    $sql = sprintf($sql, $emp_no, $dept_no);
+    $query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($query);
+    return $result['count'] > 0;
 }

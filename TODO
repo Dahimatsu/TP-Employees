@@ -16,14 +16,14 @@
             ✔ Input date : Date de debut @done
         ☐ Traitement-manager.php
             ✔ Recuperation des donnees via POST @done
-            ☐ Fonction invalideDate
-                - Arguments : Date de debut
-                - On compare la date de debut avec la date actuelle
-                - Si la date de debut est antérieure à la date actuelle, on renvoie en paramètre error=1
-            ☐ Fonction isAnterieur
-                - Arguments : Date de debut
-                - On compare la date de debut avec la date de debut du manager actuel
-                - Si la date de debut est antérieure à la date de debut du manager actuel, on renvoie en paramère error=2
+            ✔ Fonction invalideDate @done
+                ✔ Arguments : Date de debut @done
+                ✔ On compare la date de debut avec la date actuelle @done
+                ✔ Si la date de debut est antérieure à la date actuelle, on renvoie en paramètre error=1 @done
+            ✔ Fonction isAnterieur @done
+                ✔ Arguments : Date de debut @done
+                ✔ On compare la date de debut avec la date de debut du manager actuel @done
+                ✔ Si la date de debut est antérieure à la date de debut du manager actuel, on renvoie en paramère error=2 @done
             ☐ Fonction becomeManager
                 - Arguments : ID de l'employé & ID du departement
                 - On update dans le table dept_manager le nouveau manager
