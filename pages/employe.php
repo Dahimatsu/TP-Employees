@@ -47,6 +47,39 @@ $departement = getEmployeeDept($_GET['emp_no']);
         </div>
     <?php } ?>
 
+    <?php if(isset($_POST['changeDept'])) { ?>
+        <h1 class="text-center mb-1">Changer de departement</h1>
+        <div class="justify-content-center">
+            <p class="text-center">
+                Actuellement il se trouve dans : <strong><?php echo dept_emp($cet_employe['emp_no'])['dept_name'];?></strong>
+                depuis <strong><?php echo dept_emp($cet_employe['emp_no'])['from_date']; ?></strong>
+            </p>
+            <?php 
+                $choixDept = choixDept(dept_emp($cet_employe['emp_no'])['dept_name']);
+                $nb_choiDept = count($choixDept);
+            ?>
+            <form action="traitement/traitement-.php" method="POST" class="text-center">
+                <div class="row">
+                    <div class="col-4">
+                        <select name="ls_dept">
+                            <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
+                                <option value="<?php echo $choixDept[$i]['dept_name'];?>" name="newDept"><?php echo $choixDept[$i]['dept_name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <input type="date" name="date_deptChange">
+                    </div>
+                    <div class="col-4">
+                        <input type="submit" value="Valider">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+    <?php } ?>
+
+
     <h1 class="text-center mb-1 mt-5">Informations sur l'employé</h1>
     <div class="row emp">
         <div class="col-md-5 mb-4">
@@ -76,6 +109,12 @@ $departement = getEmployeeDept($_GET['emp_no']);
                     <?php if (!isset($_POST['becomeManager']) && !isset($_GET['error']) && !isManager($cet_employe['emp_no'], $departement)) { ?>
                         <form method="post">
                             <input type="submit" class="btn btn-success" name="becomeManager" value="Devenir Manager">
+                        </form>
+                    <?php } ?>
+
+                    <?php if (!isset($_POST['changeDept'])) { ?>
+                        <form method="post">
+                            <input type="submit" class="btn btn-secondary" name="changeDept" value="Changer de departement">
                         </form>
                     <?php } ?>
 

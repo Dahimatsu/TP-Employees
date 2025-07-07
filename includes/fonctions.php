@@ -341,3 +341,28 @@ function isManager($emp_no, $dept_no)
     $result = mysqli_fetch_assoc($query);
     return $result['count'] > 0;
 }
+
+function dept_emp($emp_no)
+{
+    $sql = "SELECT dept_name, from_date
+            FROM v_empDept
+            WHERE emp_no = '%s' AND to_date = '%s'";
+    $sql = sprintf($sql, $emp_no, '9999-01-01');
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($sql_query);
+    return $result;
+}
+
+function choixDept($deptActuel) 
+{
+    $sql = "SELECT dept_name
+            FROM departments
+            WHERE dept_name NOT IN('%s')";
+    $sql = sprintf($sql, $deptActuel);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = array();
+    while($row = mysqli_fetch_assoc($sql_query)) {
+        $result[] = $row;
+    }
+    return $result;
+}
