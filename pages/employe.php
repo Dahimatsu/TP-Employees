@@ -59,20 +59,24 @@ $departement = getEmployeeDept($_GET['emp_no']);
                 $nb_choiDept = count($choixDept);
             ?>
             <form action="traitement/traitement-.php" method="POST" class="text-center">
-                <div class="row">
-                    <div class="col-4">
-                        <select name="ls_dept">
-                            <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
-                                <option value="<?php echo $choixDept[$i]['dept_name'];?>" name="newDept"><?php echo $choixDept[$i]['dept_name']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="col-4">
-                        <input type="date" name="date_deptChange">
-                    </div>
-                    <div class="col-4">
-                        <input type="submit" value="Valider">
-                    </div>
+                <div class="mb-3">
+                    <label for="ls_dept" class="form-label">Choisir un département</label>
+                    <select name="ls_dept" id="ls_dept" class="form-select" required>
+                        <option value="" disabled selected>Choisir un département</option>
+                        <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
+                            <option value="<?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>">
+                                <?php echo htmlspecialchars($choixDept[$i]['dept_name']); ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="date_deptChange" class="form-label">Date de changement</label>
+                    <input type="date" name="date_deptChange" id="date_deptChange" class="form-control" required>
+                </div>
+                <div class="mb-3 text-center">
+                    <input type="submit" value="Valider" class="btn btn-success">
+                    <a href="?emp_no=<?= $cet_employe['emp_no'] ?>&page=employe" class="btn btn-danger">Annuler</a>
                 </div>
             </form>
         </div>
