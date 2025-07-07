@@ -13,7 +13,24 @@ $departement = getEmployeeDept($_GET['emp_no']);
             <i class="bi bi-arrow-left"></i> Retour
         </a>
     </div>
-    <h1 class="text-center mb-1">Informations sur l'employé</h1>
+
+    <?php if (isset($_POST['becomeManager'])) { ?>
+        <h1 class="text-center mb-1">Devenir Manager</h1>
+        <div class="d-flex justify-content-center">
+            <form action="traitement/traitement-manager.php" method="POST" class="text-center">
+                <input type="hidden" name="ID_Emp" value="<?= $cet_employe['emp_no'] ?>">
+                <input type="hidden" name="ID_Dept" value="<?= $departement ?>">
+                <label for="dateDebut" class="form-label">Date de début :</label>
+                <input type="date" id="dateDebut" name="dateDebut" class="form-control" value="">
+                <div class="mt-3">
+                    <input type="submit" name="toManage" value="Devenir Manager" class="btn btn-primary ms-2">
+                    <a href="?emp_no=<?= $cet_employe['emp_no'] ?>&page=employe" class="btn btn-danger">Annuler</a>
+                </div>
+            </form>
+        </div>
+    <?php } ?>
+
+    <h1 class="text-center mb-1 mt-5">Informations sur l'employé</h1>
     <div class="row emp">
         <div class="col-md-5 mb-4">
             <div class="card">
@@ -33,9 +50,13 @@ $departement = getEmployeeDept($_GET['emp_no']);
                             <strong><?= $longestJob['title']; ?> - <?= dayToYear($longestJob['duree']); ?></strong>
                         </p>
                     <?php } ?>
-                    <button class="btn btn-secondary" name="becomeDept">
-                        Devenir Manager
-                    </button>
+
+                    <?php if (!isset($_POST['becomeManager'])) { ?>
+                        <form method="post">
+                            <input type="submit" class="btn btn-secondary" name="becomeManager" value="Devenir Manager">
+                        </form>
+                    <?php } ?>
+
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <i class="bi bi-calendar-date"></i> Date de Naissance:

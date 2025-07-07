@@ -54,7 +54,7 @@ $page = $_GET['page'];
         <div class="footer-bottom-bar text-center py-2">
             <div class="container d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
                 <span class="copyright-text">ETU004054 - RAVELOMANANTSOA Tony Mahefa</span>
-                <span class="copyright-text">ETU004054 - RAKOTOBE Joshua Riki</span>
+                <span class="copyright-text">ETU004155 - RAKOTOBE Joshua Riki</span>
             </div>
         </div>
     </footer>
