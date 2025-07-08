@@ -58,7 +58,7 @@ $departement = getEmployeeDept($_GET['emp_no']);
             $choixDept = choixDept(dept_emp($cet_employe['emp_no'])['dept_name']);
             $nb_choiDept = count($choixDept);
             ?>
-            <form action="traitement/traitement-changeDept.php" method="POST" class="text-center">
+            <form action="traitements/traitement-changeDept.php" method="POST" class="text-center">
                 <div class="row">
                     <div class="col-4">
                         <select name="ls_dept">
