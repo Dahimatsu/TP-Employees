@@ -44,8 +44,8 @@
     ✔ Bouton Ajouter et Modifier sur le Navbar - 4054 @done
     ☐ Ajouter
         ✔ Botton choisir le type d'ajout - 4054 @done
-        ☐ Ajouter un employé - 4054
-            ✔ Formulaire d'ajout d'un employé @done
+        ✔ Ajouter un employé @done
+            ✔ Formulaire d'ajout d'un employé - 4054@done
                 ✔ Action : traitement_ajout.php @done
                 ✔ Method : POST @done
                 ✔ Input text : Nom de l'employé @done
@@ -54,7 +54,7 @@
                 ✔ Select : sexe @done
                 ✔ Bouton submit : Ajouter Employe @done
             ☐ Traitement-ajout.php
-                ✔ if Ajouter Employé @done
+                ✔ if Ajouter Employé - 4054 @done
                     ✔ Récupération des données via POST @done
                     ✔ Validation des données (nom, prénom, date, sexe) @done
                     ✔ Insertion dans la base de données @done
