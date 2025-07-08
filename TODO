@@ -43,20 +43,27 @@
 ☐ Version 5
     ✔ Bouton Ajouter et Modifier sur le Navbar - 4054 @done
     ☐ Ajouter
-        ☐ Botton choisir le type d'ajout - 4054
+        ✔ Botton choisir le type d'ajout - 4054 @done
         ☐ Ajouter un employé - 4054
-            ☐ Formulaire d'ajout d'un employé
-                ☐ Action : traitement_ajout.php
-                ☐ Method : POST
-                ☐ Input Select : Choix du département
-                ☐ Input text : Nom de l'employé
-                ☐ Input text : Prénom de l'employé
-                ☐ Input date : Date de début de l'employé
-                ☐ Bouton submit : Ajouter
+            ✔ Formulaire d'ajout d'un employé @done
+                ✔ Action : traitement_ajout.php @done
+                ✔ Method : POST @done
+                ✔ Input text : Nom de l'employé @done
+                ✔ Input text : Prénom de l'employé @done
+                ✔ Input date : Date de naissance @done
+                ✔ Select : sexe @done
+                ✔ Bouton submit : Ajouter Employe @done
             ☐ Traitement-ajout.php
-                ☐ Récupération des données via POST
-                ☐ Validation des données (nom, prénom, date)
-                ☐ Insertion dans la base de données
+                ✔ if Ajouter Employé @done
+                    ✔ Récupération des données via POST @done
+                    ✔ Validation des données (nom, prénom, date, sexe) @done
+                    ✔ Insertion dans la base de données @done
+                        ✔ Fonction getLastId @done
+                            ✔ Récupération de l'ID du dernier employé inséré @done
+                        ✔ Fonction insertEmploye @done
+                            ✔ Arguments : nom, prénom, date de naissance, sexe @done
+                            ✔ Insertion dans la table employees @done
+
     ☐ Modifier
         
             

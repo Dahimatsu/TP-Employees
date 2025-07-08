@@ -383,11 +383,3 @@ function insertNewEmpDept($emp_no, $dept_no, $dateDebutNewDept)
     $sql = sprintf($sql, $emp_no, $dept_no, $dateDebutNewDept);
     $sql_query = mysqli_query(dbconnect(), $sql);
 }
-
-function addDept($dept_no, $dept_name)
-{
-    $sql = "INSERT INTO departments (dept_no, dept_name)
-            VALUES ('%s', '%s')";
-    $sql = sprintf($sql, $dept_no, $dept_name);
-    $sql_query = mysqli_query(dbconnect(), $sql);
-}
