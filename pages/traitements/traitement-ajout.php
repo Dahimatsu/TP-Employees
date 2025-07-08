@@ -3,9 +3,12 @@ require("../../includes/fonctions.php");
 
 if (isset($_POST['ajouterEmploye'])) {
     $nom = $_POST['lastName'];
+    ucfirst($nom);
     $prenom = $_POST['firstName'];
+    ucfirst($prenom);
     $dateNaissance = $_POST['birthDate'];
     $sexe = $_POST['sex'];
+
     if ($sexe === 'Homme') {
         $sexe = 'M';
     } elseif ($sexe === 'Femme') {
@@ -18,9 +21,19 @@ if (isset($_POST['ajouterEmploye'])) {
 }
 
 if (isset($_POST['ajouterDepartement'])) {
-    $no_dept = getLastDeptNo() + 1;
+    $lastDeptNo = getLastDeptNo();
+    $num = intval(substr($lastDeptNo, 1));
+    $nextNum = $num + 1;
+    $no_dept = 'd' . str_pad($nextNum, 3, '0', STR_PAD_LEFT);
     $dept_name = $_POST['dept_name'];
-    addDept($no_dept, $dept_name);
+    ucfirst($dept_name);
+
+    if(!deptAlreadyExists($dept_name)) {
+        addDept($no_dept, $dept_name);
+    } else {
+        header('Location: ../modele.php?page=ajouter&error=dept_exists');
+        exit();
+    }
 
     header('Location: ../modele.php?page=ajouter&success=departement');
 }

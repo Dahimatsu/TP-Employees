@@ -422,3 +422,13 @@ function insertNewEmployee($emp_no, $nom, $prenom, $dateNaissance, $sexe)
     mysqli_query(dbconnect(), $sql);
 }
 
+function deptAlreadyExists($dept_name)
+{
+    $sql = "SELECT COUNT(*) AS count 
+            FROM departments 
+            WHERE dept_name = '%s'";
+    $sql = sprintf($sql, $dept_name);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($sql_query);
+    return $result['count'] > 0;
+}

@@ -59,6 +59,12 @@
             </div>
         <?php } ?>
 
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'dept_exists') { ?>
+            <div class="alert alert-danger mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
+                <small>Le département existe déjà !</small>
+            </div>
+        <?php } ?>
+
         <?php if (isset($_POST['ajouterDepartement'])) { ?>
             <h1 class="mb-4">Ajouter un département</h1>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
