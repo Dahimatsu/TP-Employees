@@ -27,7 +27,8 @@ main {
   gap: 25px;
 }
 
-.header-nav-links a {
+.header-nav-links a,
+.mobileNav a {
   color: #555;
   text-decoration: none;
   font-size: 0.95rem;
@@ -266,6 +267,19 @@ tbody a {
 .rowInfoEmploi {
   padding-top: 50px;
 }
+
 .titleInfoEmploi {
   margin-bottom: 30px;
+}
+
+.changer input {
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.changer input:hover {
+  background-color: #28a745;
+  border: none;
+  transform: scale(1.03);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }

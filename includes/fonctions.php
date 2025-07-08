@@ -310,20 +310,20 @@ function getCurrentManager($dept_no)
     return mysqli_fetch_assoc($query);
 }
 
-function notManagerAnymore($emp_no, $dept_no)
+function notManagerAnymore($emp_no, $dept_no, $to_date)
 {
     $sql = "UPDATE dept_manager 
-            SET to_date = NOW()
+            SET to_date = '%s' 
             WHERE emp_no = '%s' 
             AND dept_no = '%s'";
-    $sql = sprintf($sql, $emp_no, $dept_no);
+    $sql = sprintf($sql, $emp_no, $dept_no, $to_date);
     return mysqli_query(dbconnect(), $sql);
 }
 
 function becomeManager($emp_no, $dept_no, $dateDebut, $currentManager)
 {
-    notManagerAnymore($currentManager['emp_no'], $dept_no);
-    $sql = "INSERT INTO dept_manager (emp_no, dept_no, from_date, to_date)
+    notManagerAnymore($currentManager['emp_no'], $dept_no, $dateDebut);
+    $sql = "INSERT INTO dept_manager (emp_no, dept_no, from_date,   to_date)
             VALUES ('%s', '%s', '%s', '9999-01-01')";
     $sql = sprintf($sql, $emp_no, $dept_no, $dateDebut);
     return mysqli_query(dbconnect(), $sql);

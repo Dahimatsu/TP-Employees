@@ -22,7 +22,7 @@ $page = $_GET['page'];
                 <a class="header-logo" href="?page=accueil">
                     TJ Corporation
                 </a>
-                <div class="header-nav-links">
+                <div class="header-nav-links d-none d-md-block">
                     <ul class="d-flex align-items-center mb-0 list-unstyled">
                         <li>
                             <a href="modele.php?page=accueil">
@@ -38,7 +38,40 @@ $page = $_GET['page'];
                             <a href="modele.php?page=infoEmploi">
                                 <i class="bi bi-info-circle"></i> Nos emplois
                             </a>
-
+                        </li>
+                        <li>
+                            <a href="modele.php?page=ajouter">
+                                <i class="bi bi-plus"></i> Ajouter
+                            </a>
+                        </li>
+                        <li>
+                            <a href="modele.php?page=modifier">
+                                <i class="bi bi-pen"></i> Modifier
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-block d-md-none">
+                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-list" style="font-size: 2rem;"></i>
+                    </button>
+                </div>
+                <div class="collapse mobileNav" id="mobileNav">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="modele.php?page=accueil" class="d-block py-2">
+                                <i class="bi bi-house-door"></i> Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="modele.php?page=rechercher" class="d-block py-2">
+                                <i class="bi bi-search"></i> Rechercher
+                            </a>
+                        </li>
+                        <li>
+                            <a href="modele.php?page=infoEmploi" class="d-block py-2">
+                                <i class="bi bi-info-circle"></i> Nos emplois
+                            </a>
                         </li>
                     </ul>
                 </div>
