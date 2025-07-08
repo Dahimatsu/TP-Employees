@@ -366,3 +366,20 @@ function choixDept($deptActuel)
     }
     return $result;
 }
+
+function updateEmpDept($dateDebutNewDept, $emp_no) 
+{   
+    $sql = "UPDATE dept_emp
+            SET to_date = '%s'
+            WHERE emp_no = '%s' AND to_date = '9999-01-01'";
+    $sql = sprintf($sql, $dateDebutNewDept, $emp_no);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+}
+
+function insertNewEmpDept($emp_no, $dept_no, $dateDebutNewDept)
+{
+    $sql = "INSERT INTO dept_emp (emp_no, dept_no, from_date, to_date)
+            VALUES ('%s', '%s', '%s', '9999-01-01')";
+    $sql = sprintf($sql, $emp_no, $dept_no, $dateDebutNewDept);
+    $sql_query = mysqli_query(dbconnect(), $sql);
+}

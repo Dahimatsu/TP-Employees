@@ -47,7 +47,10 @@ $departement = getEmployeeDept($_GET['emp_no']);
         </div>
     <?php } ?>
 
-    <?php if(isset($_POST['changeDept'])) { ?>
+    <?php if(isset($_POST['changeDept']) || isset($_GET['erreurChangeDept']) ) { ?>
+        <?php if(isset($_GET['erreurChangeDept'])) { ?>
+            <div class="alert alert-danger mt-3 p-2 text-center" style="font-size:0.95em;">Date invalide, veuillez recommencer.</div>
+        <?php } ?>
         <h1 class="text-center mb-1">Changer de departement</h1>
         <div class="justify-content-center">
             <p class="text-center">
@@ -58,19 +61,21 @@ $departement = getEmployeeDept($_GET['emp_no']);
                 $choixDept = choixDept(dept_emp($cet_employe['emp_no'])['dept_name']);
                 $nb_choiDept = count($choixDept);
             ?>
-            <form action="traitement/traitement-.php" method="POST" class="text-center">
+            <form action="traitements/traitement-changeDept.php" method="POST" class="text-center">
                 <div class="row">
                     <div class="col-4">
-                        <select name="ls_dept">
+                        <select id="ls_dept" name="ls_dept">
                             <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
-                                <option value="<?php echo $choixDept[$i]['dept_name'];?>" name="newDept"><?php echo $choixDept[$i]['dept_name']; ?></option>
+                                <option value="<?php echo $choixDept[$i]['dept_name'] ?>"><?php echo $choixDept[$i]['dept_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-4">
                         <input type="date" name="date_deptChange">
+                        <input type="hidden" name="date_actuelDept" value="<?php echo dept_emp($cet_employe['emp_no'])['from_date'] ?>">
                     </div>
                     <div class="col-4">
+                        <input type="hidden" name="emp_no" value="<?php echo $cet_employe['emp_no'];?>">
                         <input type="submit" value="Valider">
                     </div>
                 </div>

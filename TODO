@@ -2,7 +2,7 @@
 ☐ Version 2
 ☐ Version 3
 ☐ Version 4
-    ☐ Changement de departement - 4155
+    ✔ Changement de departement - 4155 @done(25-07-08 15:46)
             ✔ Bouton  "changer dept" -> Dans employe.php @done(25-07-07 09:40)
                 ✔ Afficher son departement avant changement - date de début de ce dept @done(25-07-07 10:08)
                     ✔ Manao vue ho an'ilay departement mi-Join emp mi-join depatement name @done(25-07-07 10:59)
@@ -10,8 +10,10 @@
                     ✔ Fonction mi-afficher an'ireo données ireo, dia manala ny dept actuel @done(25-07-07 10:08)
                 ✔ input date pour la date @done(25-07-07 11:00)
                 ✔ bouton valider vers traitement_changeDept @done(25-07-07 11:00)
-                ☐ Message d'erreur si le beginning date du nv dept est inferieur à celle de celui qu'on a changé
-                ☐ Verifier dans sa fiche que le dept est à jour
+                    ✔ Verifier si la nouvelle date est antérieur à celle de la date actuelle @done(25-07-08 15:45)
+                        ✔ OUI - Message d'erreur @done(25-07-08 15:46)
+                        ✔ NON - fonction update pour inserer son nouveau departement @done(25-07-08 15:46)
+                ✔ Verifier dans sa fiche que le dept est à jour @done(25-07-08 15:46)
 
     ✔ Devenir Manager - 4054 @done
         ✔ Bouton Devenir Manager - 4054 @done
