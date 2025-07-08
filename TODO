@@ -38,3 +38,23 @@
                 ✔ Arguments : ID de l'employé & ID du departement @done
                 ✔ On update dans le table dept_manager le nouveau manager @done
             ✔ Utiliser le fonction becomeManager pour update le tableau @done
+☐ Version 5
+    ✔ Bouton Ajouter et Modifier sur le Navbar - 4054 @done
+    ☐ Ajouter
+        ☐ Botton choisir le type d'ajout - 4054
+        ☐ Ajouter un employé - 4054
+            ☐ Formulaire d'ajout d'un employé
+                ☐ Action : traitement_ajout.php
+                ☐ Method : POST
+                ☐ Input Select : Choix du département
+                ☐ Input text : Nom de l'employé
+                ☐ Input text : Prénom de l'employé
+                ☐ Input date : Date de début de l'employé
+                ☐ Bouton submit : Ajouter
+            ☐ Traitement-ajout.php
+                ☐ Récupération des données via POST
+                ☐ Validation des données (nom, prénom, date)
+                ☐ Insertion dans la base de données
+    ☐ Modifier
+        
+            

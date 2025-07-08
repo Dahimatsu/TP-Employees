@@ -39,6 +39,16 @@ $page = $_GET['page'];
                                 <i class="bi bi-info-circle"></i> Nos emplois
                             </a>
                         </li>
+                        <li>
+                            <a href="modele.php?page=ajouter">
+                                <i class="bi bi-plus"></i> Ajouter
+                            </a>
+                        </li>
+                        <li>
+                            <a href="modele.php?page=modifier">
+                                <i class="bi bi-pen"></i> Modifier
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="d-block d-md-none">
