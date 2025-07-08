@@ -1,8 +1,11 @@
 <section class="container mt-5">
     <div class="d-flex flex-column align-items-center justify-content-center">
-        <form method="POST">
-            <input type="submit" name="ajouterEmploye" value="Ajouter un employé" class="btn btn-primary mb-3">
-        </form>
+
+        <?php if (!isset($_POST['ajouterEmploye'])) { ?>
+            <form method="POST">
+                <input type="submit" name="ajouterEmploye" value="Ajouter un employé" class="btn btn-primary mb-3">
+            </form>
+        <?php } ?>
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 'employe') { ?>
             <div class="alert alert-success mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
@@ -12,6 +15,7 @@
 
 
         <?php if (isset($_POST['ajouterEmploye'])) { ?>
+            <h1 class="mb-4">Ajouter un employé</h1>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
                 <small>Veuillez remplir le formulaire suivant</small>
             </div>
@@ -43,9 +47,11 @@
             </form>
         <?php } ?>
 
-        <form method="POST">
-            <input type="submit" name="ajouterDepartement" value="Ajouter un département" class="btn btn-primary mt-3 mb-3">
-        </form>
+        <?php if (!isset($_POST['ajouterDepartement'])) { ?>
+            <form method="POST">
+                <input type="submit" name="ajouterDepartement" value="Ajouter un département" class="btn btn-primary mt-3 mb-3">
+            </form>
+        <?php } ?>
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 'departement') { ?>
             <div class="alert alert-success mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
@@ -54,6 +60,7 @@
         <?php } ?>
 
         <?php if (isset($_POST['ajouterDepartement'])) { ?>
+            <h1 class="mb-4">Ajouter un département</h1>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
                 <small>Veuillez remplir le formulaire suivant</small>
             </div>
@@ -63,7 +70,7 @@
                     <input type="text" id="dept_name" name="dept_name" class="form-control" required>
                 </div>
                 <div class="d-flex justify-content-center gap-2">
-                    <button type="submit" name="submitEmploye" class="btn btn-success">Ajouter le departement</button>
+                    <button type="submit" name="ajouterDepartement" class="btn btn-success">Ajouter le departement</button>
                     <a href="modele.php?page=ajouter" class="btn btn-danger">Annuler</a>
                 </div>
             </form>

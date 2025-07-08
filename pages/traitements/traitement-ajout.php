@@ -15,6 +15,12 @@ if (isset($_POST['ajouterEmploye'])) {
 
     insertNewEmployee($id, $nom, $prenom, $dateNaissance, $sexe);
     header("Location: ../modele.php?page=ajouter&success=employe");
+}
 
-    exit;
+if (isset($_POST['ajouterDepartement'])) {
+    $no_dept = getLastDeptNo() + 1;
+    $dept_name = $_POST['dept_name'];
+    addDept($no_dept, $dept_name);
+
+    header('Location: ../modele.php?page=ajouter&success=departement');
 }
