@@ -383,3 +383,23 @@ function insertNewEmpDept($emp_no, $dept_no, $dateDebutNewDept)
     $sql = sprintf($sql, $emp_no, $dept_no, $dateDebutNewDept);
     $sql_query = mysqli_query(dbconnect(), $sql);
 }
+
+function getLastEmpNo()
+{
+    $sql = "SELECT emp_no 
+            FROM employees 
+            ORDER BY emp_no DESC 
+            LIMIT 1";
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($sql_query);
+    return $result['emp_no'];
+}
+
+function insertNewEmployee($emp_no, $nom, $prenom, $dateNaissance, $sexe)
+{
+    $sql = "INSERT INTO employees (emp_no, last_name, first_name, birth_date, gender, hire_date)
+            VALUES ('%s', '%s', '%s', '%s', '%s', NOW())";
+    $sql = sprintf($sql, $emp_no, $nom, $prenom, $dateNaissance, $sexe);
+    mysqli_query(dbconnect(), $sql);
+}
+

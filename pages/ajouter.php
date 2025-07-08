@@ -3,11 +3,24 @@
         <form method="POST">
             <input type="submit" name="ajouterEmploye" value="Ajouter un employé" class="btn btn-primary mb-3">
         </form>
+
+        <?php if (isset($_GET['success']) && $_GET['success'] == 'employe') { ?>
+            <div class="alert alert-success mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
+                <small>Employé ajouté avec succès !</small>
+            </div>
+        <?php } ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'employe') { ?>
+            <div class="alert alert-danger mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
+                <small>Erreur lors de l'ajout de l'employé. Veuillez réessayer.</small>
+            </div>
+        <?php } ?>
+
         <?php if (isset($_POST['ajouterEmploye'])) { ?>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
                 <small>Veuillez remplir le formulaire suivant</small>
             </div>
-            <form action="traitements/traitement-employe.php" method="POST" class="w-50">
+            <form action="traitements/traitement-ajout.php" method="POST" class="w-50">
                 <div class="mb-3">
                     <label for="lastName" class="form-label">Nom</label>
                     <input type="text" id="lastName" name="lastName" class="form-control" required>
@@ -26,11 +39,12 @@
                         <option value="" disabled selected>Choisir le sexe</option>
                         <option value="Homme">Homme</option>
                         <option value="Femme">Femme</option>
-                        <option value="Autre">Autre</option>
                     </select>
                 </div>
-                <button type="submit" name="submitEmploye" class="btn btn-success">Ajouter l'employé</button>
-                <a href="modele.php?page=ajouter" class="btn btn-danger">Annuler</a>
+                <div class="d-flex justify-content-center gap-2">
+                    <button type="submit" name="ajouterEmploye" class="btn btn-success">Ajouter l'employé</button>
+                    <a href="modele.php?page=ajouter" class="btn btn-danger">Annuler</a>
+                </div>
             </form>
         <?php } ?>
 
