@@ -62,8 +62,10 @@
                     <label for="firstName" class="form-label">Nom de departement</label>
                     <input type="text" id="dept_name" name="dept_name" class="form-control" required>
                 </div>
-                <button type="submit" name="submitEmploye" class="btn btn-success">Ajouter le departement</button>
-                <a href="modele.php?page=ajouter" class="btn btn-danger">Annuler</a>
+                <div class="d-flex justify-content-center gap-2">
+                    <button type="submit" name="submitEmploye" class="btn btn-success">Ajouter le departement</button>
+                    <a href="modele.php?page=ajouter" class="btn btn-danger">Annuler</a>
+                </div>
             </form>
         <?php } ?>
     </div>
