@@ -61,16 +61,18 @@ $departement = getEmployeeDept($_GET['emp_no']);
             <form action="traitements/traitement-changeDept.php" method="POST" class="text-center">
                 <div class="row">
                     <div class="col-4">
-                        <select name="ls_dept">
+                        <select id="ls_dept" name="ls_dept">
                             <?php for($i=0; $i<$nb_choiDept; $i++) { ?>
-                                <option value="<?php echo $choixDept[$i]['dept_name'];?>" name="newDept"><?php echo $choixDept[$i]['dept_name']; ?></option>
+                                <option value="<?php echo $choixDept[$i]['dept_name'] ?>"><?php echo $choixDept[$i]['dept_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-4">
                         <input type="date" name="date_deptChange">
+                        <input type="hidden" name="date_actuelDept" value="<?php echo dept_emp($cet_employe['emp_no'])['from_date'] ?>">
                     </div>
                     <div class="col-4">
+                        <input type="hidden" name="emp_no" value="<?php echo $cet_employe['emp_no'];?>">
                         <input type="submit" value="Valider">
                     </div>
                 </div>
