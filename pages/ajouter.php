@@ -10,11 +10,6 @@
             </div>
         <?php } ?>
 
-        <?php if (isset($_GET['error']) && $_GET['error'] == 'employe') { ?>
-            <div class="alert alert-danger mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
-                <small>Erreur lors de l'ajout de l'employé. Veuillez réessayer.</small>
-            </div>
-        <?php } ?>
 
         <?php if (isset($_POST['ajouterEmploye'])) { ?>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
@@ -51,20 +46,18 @@
         <form method="POST">
             <input type="submit" name="ajouterDepartement" value="Ajouter un département" class="btn btn-primary mt-3 mb-3">
         </form>
-        <?php if(isset($_GET['success'])) { ?>
-            <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
-                <small>Departement ajouter avec succès !</small>
+
+        <?php if (isset($_GET['success']) && $_GET['success'] == 'departement') { ?>
+            <div class="alert alert-success mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
+                <small>Departement ajouté avec succès !</small>
             </div>
         <?php } ?>
+
         <?php if (isset($_POST['ajouterDepartement'])) { ?>
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
                 <small>Veuillez remplir le formulaire suivant</small>
             </div>
             <form action="traitements/traitement-departement.php" method="POST" class="w-50">
-                <div class="mb-3">
-                    <label for="lastName" class="form-label">Numéro de departement</label>
-                    <input type="text" id="no_dept" name="no_dept" class="form-control" required>
-                </div>
                 <div class="mb-3">
                     <label for="firstName" class="form-label">Nom de departement</label>
                     <input type="text" id="dept_name" name="dept_name" class="form-control" required>

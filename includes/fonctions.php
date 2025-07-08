@@ -384,6 +384,17 @@ function insertNewEmpDept($emp_no, $dept_no, $dateDebutNewDept)
     $sql_query = mysqli_query(dbconnect(), $sql);
 }
 
+function getLastDeptNo()
+{
+    $sql = "SELECT dept_no 
+            FROM departments 
+            ORDER BY dept_no DESC 
+            LIMIT 1";
+    $sql_query = mysqli_query(dbconnect(), $sql);
+    $result = mysqli_fetch_assoc($sql_query);
+    return $result['dept_no'];
+}
+
 function addDept($dept_no, $dept_name)
 {
     $sql = "INSERT INTO departments (dept_no, dept_name)
@@ -391,6 +402,7 @@ function addDept($dept_no, $dept_name)
     $sql = sprintf($sql, $dept_no, $dept_name);
     $sql_query = mysqli_query(dbconnect(), $sql);
 }
+
 function getLastEmpNo()
 {
     $sql = "SELECT emp_no 
