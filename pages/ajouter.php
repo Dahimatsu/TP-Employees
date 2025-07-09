@@ -70,7 +70,7 @@
             <div class="alert alert-info mb-2 py-1 px-2" role="alert" style="font-size: 0.9rem;">
                 <small>Veuillez remplir le formulaire suivant</small>
             </div>
-            <form action="traitements/traitement-departement.php" method="POST" class="w-50">
+            <form action="traitements/traitement-ajout.php" method="POST" class="w-50">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">Nom de departement</label>
                     <input type="text" id="dept_name" name="dept_name" class="form-control" required>
